@@ -10,7 +10,61 @@ const user = telegramUser || {
   first_name: "Бақдәулет",
   username: "demo"
 };
+const ACCESS_API = "https://neurobilim-access.dosmuhammeduly.workers.dev/";
 
+let channelAccess = {
+  checked: false,
+  subscribed: false,
+  status: null,
+  error: null
+};
+
+async function checkChannelAccess() {
+  if (!tg?.initData) {
+    channelAccess = {
+      checked: true,
+      subscribed: false,
+      status: null,
+      error: "telegram_required"
+    };
+
+    return channelAccess;
+  }
+
+  try {
+    const response = await fetch(ACCESS_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        initData: tg.initData
+      })
+    });
+
+    const data = await response.json();
+
+    channelAccess = {
+      checked: true,
+      subscribed: Boolean(data.ok && data.subscribed),
+      status: data.status || null,
+      error: data.ok ? null : (data.error || "access_check_failed")
+    };
+
+    return channelAccess;
+  } catch (error) {
+    console.error("Channel access check failed:", error);
+
+    channelAccess = {
+      checked: true,
+      subscribed: false,
+      status: null,
+      error: "network_error"
+    };
+
+    return channelAccess;
+  }
+}
 const i18n = {
   kk: {
     hello: "Сәлем",
