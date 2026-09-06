@@ -109,8 +109,8 @@ function selectCourse(id){ if(courses.some(c=>c.id===id)) state.courseId=id; }
 function courseCard(c){
   const previous=state.courseId; selectCourse(c.id);
   const html=`<section class="course-card" style="margin-bottom:16px">
-    <div class="course-top"><div><h3>${escapeHTML(c[state.lang].title)}</h3>
-    <p>${escapeHTML(c[state.lang].description)}</p><div class="meta">${lessons().length} ${t('lessonCount')}</div></div><div class="meta">${progressPct()}%</div></div>
+    <div class="course-top">${courseArtwork()}<div><h3>${escapeHTML(c[state.lang].title)}</h3><div class="meta">${lessons().length} ${t('lessonCount')}</div></div></div>
+    <p class="course-description">${escapeHTML(c[state.lang].description)}</p>
     <div class="progress-wrap"><div class="progress-line"><div class="progress-bar" style="width:${progressPct()}%"></div></div>
     <div class="progress-text"><span>${completedCount()} / ${lessons().length} ${t('completed')}</span><span>${progressPct()}%</span></div></div>
     <button class="primary" onclick="selectCourse('${c.id}');showCourse()">${t('openCourse')}</button></section>`;
@@ -136,19 +136,32 @@ function langSwitch(){
     </div>`;
 }
 
+let mountedView = '';
+function mount(markup){
+  const view = state.page + ':' + state.courseId + ':' + (state.page === 'lesson' ? state.lessonId : '');
+  const previous = document.querySelector?.('.app');
+  const scrollTop = mountedView === view ? previous?.scrollTop || 0 : 0;
+  document.getElementById('app').innerHTML = markup;
+  const current = document.querySelector?.('.app');
+  if (current) current.scrollTop = scrollTop;
+  mountedView = view;
+}
+function courseArtwork(){
+  return '<svg class="course-art" viewBox="0 0 80 80" fill="none" aria-hidden="true"><rect width="80" height="80" rx="18" fill="#dceaff"/><path d="M14 25c10-4 18-2 26 3 8-5 16-7 26-3v35c-10-4-18-2-26 3-8-5-16-7-26-3V25Z" fill="white" stroke="#2563eb" stroke-width="2"/><path d="M40 28v35M21 36l11 2M21 44l11 2M48 37h10M48 45h10" stroke="#93b8f5" stroke-width="2.5" stroke-linecap="round"/><rect x="29" y="10" width="23" height="23" rx="7" fill="#2563eb"/><path d="m40.5 14 2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6Z" fill="white"/></svg>';
+}
 function renderNav(active){
   return `
-    <div class="bottom-nav">
+    <footer class="nav-dock"><nav class="bottom-nav">
       <button class="${active==='home'?'active':''}" onclick="renderHome()">${t('home')}</button>
       <button class="${active==='profile'?'active':''}" onclick="goProfile()">${t('profile')}</button>
-    </div>`;
+    </nav></footer>`;
 }
 
 function renderHome(){
   state.page='home';
   const nextLesson = lessons().find(l => !completed().includes(l.id)) || lessons()[0];
   document.documentElement.lang = state.lang === "kk" ? "kk" : "ru";
-  document.getElementById("app").innerHTML = `
+  mount(`
     <main class="app">
       <div class="header">
         <div>
@@ -162,30 +175,31 @@ function renderHome(){
       </div>
 
       <section class="hero">
-        <div>
+        <div class="hero-copy">
           <h1>${t('heroTitle')}</h1>
-          <p>${t('heroText')}</p>
-        </div>
+          <p class="hero-description">${t('heroText')}</p><p class="hero-description-short">${state.lang === 'kk' ? 'ЖИ мен заманауи технологияларды практика арқылы үйреніңіз.' : 'Изучайте ИИ и современные технологии на практике.'}</p>
         <button class="cta" onclick="openLesson(${nextLesson.id})">
           ${completedCount() ? t('continue') : t('start')}
         </button>
+        </div>
+        <img class="hero-portrait" src="./portrait.png" alt="" />
       </section>
 
       <h2 class="section-title">${t('myCourse')}</h2>
       ${courses.map(courseCard).join("")}
 
-      ${renderNav('home')}
-    </main>`;
+    </main>
+    ${renderNav('home')}`);
 }
 
 function showCourse(){
   state.page='course';
-  document.getElementById("app").innerHTML = `
+  mount(`
     <main class="app">
       <div class="topbar">
         <button class="back" onclick="renderHome()">←</button>
         <div>
-          <div style="font-weight:800;font-size:21px">${escapeHTML(course()[state.lang].title)}</div>
+          <div class="course-heading">${escapeHTML(course()[state.lang].title)}</div>
           <div class="small">${completedCount()} / ${lessons().length} ${t('completed')}</div>
         </div>
         <div style="margin-left:auto">${langSwitch()}</div>
@@ -209,7 +223,7 @@ function showCourse(){
             </button>`;
         }).join("")}
       </div>
-    </main>`;
+    </main>`);
 }
 
 function openLesson(id){
@@ -217,7 +231,7 @@ function openLesson(id){
   state.page='lesson'; state.lessonId=id;
   const lesson = lessons().find(l=>l.id===id);
   const done = completed().includes(id);
-  document.getElementById("app").innerHTML = `
+  mount(`
     <main class="app lesson-page">
       <div class="topbar">
         <button class="back" onclick="showCourse()">←</button>
@@ -240,7 +254,7 @@ function openLesson(id){
           ? `<button class="secondary" onclick="openLesson(${lessons()[lessons().findIndex(l=>l.id===id)+1].id})">${t('next')}</button>`
           : `<button class="secondary" onclick="showCourse()">${t('backCourse')}</button>`}
       </div>
-    </main>`;
+    </main>`);
 }
 
 function toggleComplete(id){
@@ -255,7 +269,7 @@ function toggleComplete(id){
 
 function goProfile(){
   state.page='profile';
-  document.getElementById("app").innerHTML = `
+  mount(`
     <main class="app">
       <div class="header">
         <div>
@@ -284,8 +298,8 @@ function goProfile(){
         </div>
       </section>
 
-      ${renderNav('profile')}
-    </main>`;
+    </main>
+    ${renderNav('profile')}`);
 }
 
 renderHome();
