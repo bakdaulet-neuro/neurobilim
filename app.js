@@ -15,11 +15,11 @@ const i18n = {
   kk: {
     hello: "Сәлем",
     platform: "Сіздің оқу платформаңыз",
-    heroTitle: "Telegram ішіндегі 5 сабақтан тұратын курс",
-    heroText: "Өз қарқыныңызбен оқып, тоқтаған жеріңізден жалғастырыңыз.",
+    heroTitle: "NeuroBilim платформасы",
+    heroText: "Жасанды интеллект пен заманауи технологияларды қарапайым әрі практикалық форматта үйреніңіз.",
     start: "Оқуды бастау",
     continue: "Оқуды жалғастыру",
-    myCourse: "Менің курсым",
+    myCourse: "Менің курстарым",
     pilotCourse: "Пилоттық курс",
     lessons5: "5 сабақ · шамамен 36 минут",
     completed: "аяқталды",
@@ -32,7 +32,7 @@ const i18n = {
     passed: "Өтілді",
     notPassed: "Өтілмеді",
     note: "Ескерту",
-    markPassed: "Сабақты аяқталды деп белгілеу",
+    markPassed: "Сабақты аяқтау",
     passedBtn: "✓ Сабақ өтілді",
     next: "Келесі сабақ →",
     backCourse: "Курсқа оралу",
@@ -42,11 +42,11 @@ const i18n = {
   ru: {
     hello: "Привет",
     platform: "Твоя учебная платформа",
-    heroTitle: "Курс из 5 уроков внутри Telegram",
-    heroText: "Учись в своём темпе и продолжай с того места, где остановился.",
+    heroTitle: "Платформа NeuroBilim",
+    heroText: "Изучайте искусственный интеллект и современные технологии в простом и практическом формате.",
     start: "Начать обучение",
     continue: "Продолжить обучение",
-    myCourse: "Мой курс",
+    myCourse: "Мои курсы",
     pilotCourse: "Пилотный курс",
     lessons5: "5 уроков · примерно 36 минут",
     completed: "пройдено",
@@ -59,7 +59,7 @@ const i18n = {
     passed: "Пройден",
     notPassed: "Не пройден",
     note: "Заметка",
-    markPassed: "Отметить как пройденный",
+    markPassed: "Завершить урок",
     passedBtn: "✓ Урок пройден",
     next: "Следующий урок →",
     backCourse: "Вернуться к курсу",
@@ -68,41 +68,64 @@ const i18n = {
   }
 };
 
-const lessonData = {
-  kk: [
-    {id:1,title:"Кіріспе",duration:"5 мин",text:"Бұл бірінші сабақ. Мұнда мәтін, видео, суреттер және материалдарға сілтемелер орналастыруға болады.",note:"Сабақтың мақсаты: оқушыны курс бағдарламасымен таныстыру."},
-    {id:2,title:"Тақырып негіздері",duration:"8 мин",text:"Екінші сабақта негізгі ұғымдарды түсіндіреміз. Контентті өз материалыңызға ауыстыруға болады.",note:"Мұнда видео немесе қорғалған видеохостингке сілтеме қосуға болады."},
-    {id:3,title:"Практикалық мысал",duration:"10 мин",text:"Үшінші сабақ тәжірибеге арналған. Мұнда чек-лист, нұсқаулық немесе шағын кейс болуы мүмкін.",note:"Кейін тест немесе үй тапсырмасын қосуға болады."},
-    {id:4,title:"Қателерді талдау",duration:"7 мин",text:"Төртінші сабақта жиі кездесетін қателер мен оларды түзету жолдарын көрсетеміз.",note:"«Қате → шешім» карточкаларын қосуға болады."},
-    {id:5,title:"Қорытынды",duration:"6 мин",text:"Соңғы сабақ курстың қорытындысын жасап, келесі қадамды көрсетеді.",note:"Курс соңында сертификат немесе келесі курсқа қолжетімділік беруге болады."}
-  ],
-  ru: [
-    {id:1,title:"Введение",duration:"5 мин",text:"Это первый урок. Здесь можно разместить текст, видео, изображения и ссылки на материалы.",note:"Задача урока: познакомить ученика с программой курса."},
-    {id:2,title:"Основы темы",duration:"8 мин",text:"Во втором уроке раскрываем базовые понятия. Контент можно заменить на ваш реальный материал.",note:"Можно добавить видео через iframe или ссылку на защищённый видеохостинг."},
-    {id:3,title:"Практический пример",duration:"10 мин",text:"Третий урок посвящён практике. Здесь можно добавить чек-лист, инструкцию или небольшой кейс.",note:"Позже сюда легко добавить тест или домашнее задание."},
-    {id:4,title:"Разбор ошибок",duration:"7 мин",text:"В четвёртом уроке показываем типичные ошибки и способы их исправления.",note:"Можно добавить карточки «ошибка → решение»."},
-    {id:5,title:"Итог",duration:"6 мин",text:"Финальный урок подводит итог курса и показывает следующий шаг.",note:"После прохождения можно выдавать сертификат или открывать следующий курс."}
-  ]
+Object.assign(i18n.kk, {"lessonCount":"сабақ","video":"Сабақ видеосы","notes":"Қысқаша конспект","concepts":"Негізгі түсініктер","task":"Практикалық тапсырма","materials":"Көмекші материалдар","watch":"Видеоны ашу","videoPending":"Видео жақында қосылады."});
+Object.assign(i18n.ru, {"lessonCount":"уроков","video":"Видео урока","notes":"Краткий конспект","concepts":"Ключевые понятия","task":"Практическое задание","materials":"Вспомогательные материалы","watch":"Открыть видео","videoPending":"Видео скоро появится."});
+const storage = {
+  get(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
+  put(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch {} }
 };
-
+let savedLang; try { savedLang = localStorage.getItem('lang'); } catch {}
+const storedProgress = storage.get('neurobilimProgress', {});
 const state = {
-  lang: localStorage.getItem("lang") || "kk",
-  completed: JSON.parse(localStorage.getItem("completedLessons") || "[]")
+  lang: ['kk','ru'].includes(savedLang) ? savedLang : 'kk',
+  courseId: courses[0].id,
+  progress: storedProgress && typeof storedProgress === 'object' && !Array.isArray(storedProgress) ? storedProgress : {},
+  page: 'home', lessonId: null
 };
-
+// Preserve completion from the original five-lesson static app on the same origin.
+if (!Object.prototype.hasOwnProperty.call(state.progress, courses[0].id)) {
+  const legacy = storage.get('completedLessons', []);
+  state.progress[courses[0].id] = Array.isArray(legacy) ? legacy : [];
+}
+function course(){ return courses.find(c=>c.id===state.courseId) || courses[0]; }
+function completed(){ const ids=state.progress[course().id]; return Array.isArray(ids) ? ids : []; }
 function t(key){ return i18n[state.lang][key]; }
-function lessons(){ return lessonData[state.lang]; }
-
-function saveProgress() {
-  localStorage.setItem("completedLessons", JSON.stringify(state.completed));
-}
+function lessons(){ return course().lessons.map(l=>({...l,...l[state.lang]})); }
+function saveProgress(){ storage.put('neurobilimProgress',state.progress); }
 function setLang(lang){
-  state.lang = lang;
-  localStorage.setItem("lang", lang);
-  renderHome();
+  if (!i18n[lang]) return;
+  state.lang=lang;
+  try { localStorage.setItem('lang',lang); } catch {}
+  document.documentElement.lang=lang;
+  if(state.page==='lesson') openLesson(state.lessonId);
+  else if(state.page==='course') showCourse();
+  else if(state.page==='profile') goProfile();
+  else renderHome();
 }
-function completedCount(){ return state.completed.length; }
-function progressPct(){ return Math.round((completedCount()/5)*100); }
+function completedCount(){ return lessons().filter(l=>completed().includes(l.id)).length; }
+function progressPct(){ return lessons().length ? Math.round(completedCount()/lessons().length*100) : 0; }
+function escapeHTML(value){ return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function selectCourse(id){ if(courses.some(c=>c.id===id)) state.courseId=id; }
+function courseCard(c){
+  const previous=state.courseId; selectCourse(c.id);
+  const html=`<section class="course-card" style="margin-bottom:16px">
+    <div class="course-top"><div><h3>${escapeHTML(c[state.lang].title)}</h3>
+    <p>${escapeHTML(c[state.lang].description)}</p><div class="meta">${lessons().length} ${t('lessonCount')}</div></div><div class="meta">${progressPct()}%</div></div>
+    <div class="progress-wrap"><div class="progress-line"><div class="progress-bar" style="width:${progressPct()}%"></div></div>
+    <div class="progress-text"><span>${completedCount()} / ${lessons().length} ${t('completed')}</span><span>${progressPct()}%</span></div></div>
+    <button class="primary" onclick="selectCourse('${c.id}');showCourse()">${t('openCourse')}</button></section>`;
+  state.courseId=previous; return html;
+}
+function lessonSections(lesson){
+  const video=lesson.videoUrl;
+  const safeUrl=url=>{try {return ['https:','http:'].includes(new URL(url).protocol);}catch{return false;}};
+  return `<div class="lesson-box"><strong>🎬 ${t('video')}</strong><p>${video && safeUrl(video) ? '<a target="_blank" rel="noopener noreferrer" href="'+escapeHTML(video)+'">'+t('watch')+'</a>' : t('videoPending')}</p></div>
+    <div class="lesson-box"><strong>📝 ${t('notes')}</strong><p>${escapeHTML(lesson.notes)}</p></div>
+    <div class="lesson-box"><strong>💡 ${t('concepts')}</strong><ul>${lesson.concepts.map(x=>'<li>'+escapeHTML(x)+'</li>').join('')}</ul></div>
+    <div class="lesson-box"><strong>🧪 ${t('task')}</strong><p>${escapeHTML(lesson.task)}</p></div>
+    <div class="lesson-box"><strong>📎 ${t('materials')}</strong>${lesson.materials.map(m=>'<p>'+ (m.url && safeUrl(m.url) ? '<a target="_blank" rel="noopener noreferrer" href="'+escapeHTML(m.url)+'">'+escapeHTML(m.title)+'</a>' : '<b>'+escapeHTML(m.title)+'</b><br>'+escapeHTML(m.text || ''))+'</p>').join('')}</div>`;
+}
+
 function initials(){ return (user.first_name || "Бақдәулет").slice(0,2).toUpperCase(); }
 
 function langSwitch(){
@@ -122,18 +145,19 @@ function renderNav(active){
 }
 
 function renderHome(){
-  const nextLesson = lessons().find(l => !state.completed.includes(l.id)) || lessons()[0];
+  state.page='home';
+  const nextLesson = lessons().find(l => !completed().includes(l.id)) || lessons()[0];
   document.documentElement.lang = state.lang === "kk" ? "kk" : "ru";
   document.getElementById("app").innerHTML = `
     <main class="app">
       <div class="header">
         <div>
-          <div class="greeting">${t('hello')}, ${user.first_name || "Бақдәулет"}</div>
+          <div class="greeting">${t('hello')}, ${escapeHTML(user.first_name || "Бақдәулет")}</div>
           <div class="small">${t('platform')}</div>
         </div>
         <div class="header-right">
           ${langSwitch()}
-          <div class="avatar">${initials()}</div>
+          <div class="avatar">${escapeHTML(initials())}</div>
         </div>
       </div>
 
@@ -148,38 +172,21 @@ function renderHome(){
       </section>
 
       <h2 class="section-title">${t('myCourse')}</h2>
-      <section class="course-card">
-        <div class="course-top">
-          <div>
-            <h3>${t('pilotCourse')}</h3>
-            <div class="meta">${t('lessons5')}</div>
-          </div>
-          <div class="meta">${progressPct()}%</div>
-        </div>
-
-        <div class="progress-wrap">
-          <div class="progress-line"><div class="progress-bar" style="width:${progressPct()}%"></div></div>
-          <div class="progress-text">
-            <span>${completedCount()} / 5 ${t('completed')}</span>
-            <span>${progressPct()}%</span>
-          </div>
-        </div>
-
-        <button class="primary" onclick="showCourse()">${t('openCourse')}</button>
-      </section>
+      ${courses.map(courseCard).join("")}
 
       ${renderNav('home')}
     </main>`;
 }
 
 function showCourse(){
+  state.page='course';
   document.getElementById("app").innerHTML = `
     <main class="app">
       <div class="topbar">
         <button class="back" onclick="renderHome()">←</button>
         <div>
-          <div style="font-weight:800;font-size:21px">${t('pilotCourse')}</div>
-          <div class="small">${completedCount()} / 5 ${t('completed')}</div>
+          <div style="font-weight:800;font-size:21px">${escapeHTML(course()[state.lang].title)}</div>
+          <div class="small">${completedCount()} / ${lessons().length} ${t('completed')}</div>
         </div>
         <div style="margin-left:auto">${langSwitch()}</div>
       </div>
@@ -190,13 +197,13 @@ function showCourse(){
 
       <div class="lesson-list">
         ${lessons().map(lesson => {
-          const done = state.completed.includes(lesson.id);
+          const done = completed().includes(lesson.id);
           return `
             <button class="lesson-item ${done?'done':''}" onclick="openLesson(${lesson.id})">
               <div class="lesson-num">${done?'✓':lesson.id}</div>
               <div class="lesson-body">
                 <div class="lesson-title">${lesson.title}</div>
-                <div class="lesson-status">${lesson.duration} · ${done?t('passed'):t('notPassed')}</div>
+                <div class="lesson-status">${lesson.duration ? lesson.duration + ' · ' : ''}${done?t('passed'):t('notPassed')}</div>
               </div>
               <div>›</div>
             </button>`;
@@ -206,13 +213,15 @@ function showCourse(){
 }
 
 function openLesson(id){
+  if (!lessons().some(l=>l.id===id)) return;
+  state.page='lesson'; state.lessonId=id;
   const lesson = lessons().find(l=>l.id===id);
-  const done = state.completed.includes(id);
+  const done = completed().includes(id);
   document.getElementById("app").innerHTML = `
     <main class="app lesson-page">
       <div class="topbar">
         <button class="back" onclick="showCourse()">←</button>
-        <div class="small">${t('lesson')} ${lesson.id} ${t('of')} 5</div>
+        <div class="small">${t('lesson')} ${lesson.id} ${t('of')} ${lessons().length}</div>
         <div style="margin-left:auto">${langSwitch()}</div>
       </div>
 
@@ -220,35 +229,32 @@ function openLesson(id){
       <div class="small">${lesson.duration}</div>
 
       <div class="lesson-content">
-        <p>${lesson.text}</p>
-        <div class="lesson-box">
-          <strong>${t('note')}</strong>
-          <p style="margin-bottom:0">${lesson.note}</p>
-        </div>
+        ${lessonSections(lesson)}
       </div>
 
       <div class="lesson-actions">
         <button class="primary" onclick="toggleComplete(${lesson.id})">
           ${done ? t('passedBtn') : t('markPassed')}
         </button>
-        ${lesson.id < 5
-          ? `<button class="secondary" onclick="openLesson(${lesson.id+1})">${t('next')}</button>`
+        ${lessons().findIndex(l=>l.id===id) < lessons().length-1
+          ? `<button class="secondary" onclick="openLesson(${lessons()[lessons().findIndex(l=>l.id===id)+1].id})">${t('next')}</button>`
           : `<button class="secondary" onclick="showCourse()">${t('backCourse')}</button>`}
       </div>
     </main>`;
 }
 
 function toggleComplete(id){
-  if(state.completed.includes(id)){
-    state.completed = state.completed.filter(x=>x!==id);
+  if(completed().includes(id)){
+    state.progress[course().id] = completed().filter(x=>x!==id);
   } else {
-    state.completed.push(id);
+    state.progress[course().id] = [...completed(), id];
   }
   saveProgress();
   openLesson(id);
 }
 
 function goProfile(){
+  state.page='profile';
   document.getElementById("app").innerHTML = `
     <main class="app">
       <div class="header">
@@ -263,15 +269,15 @@ function goProfile(){
       </div>
 
       <section class="profile-card">
-        <h3 style="margin-top:0">${user.first_name || "Бақдәулет"}</h3>
-        <div class="small">${user.username ? '@'+user.username : t('telegramUser')}</div>
+        <h3 style="margin-top:0">${escapeHTML(user.first_name || "Бақдәулет")}</h3>
+        <div class="small">${user.username ? '@'+escapeHTML(user.username) : t('telegramUser')}</div>
 
         <div style="margin-top:22px">
           <strong>${t('courseProgress')}</strong>
           <div class="progress-wrap">
             <div class="progress-line"><div class="progress-bar" style="width:${progressPct()}%"></div></div>
             <div class="progress-text">
-              <span>${completedCount()} / 5</span>
+              <span>${completedCount()} / ${lessons().length}</span>
               <span>${progressPct()}%</span>
             </div>
           </div>
@@ -283,3 +289,4 @@ function goProfile(){
 }
 
 renderHome();
+
