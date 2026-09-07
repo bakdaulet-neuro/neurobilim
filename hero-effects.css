@@ -1,0 +1,196 @@
+/* Neuro Bilim hero: floating AI labels behind the presenter.
+   Uses only transform + opacity for smooth Telegram WebView animation. */
+
+.hero{
+  isolation:isolate;
+  min-height:250px;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:4;
+}
+
+.hero-portrait{
+  z-index:3;
+  width:48%;
+  height:108%;
+  right:-18px;
+  bottom:-2px;
+  object-fit:contain;
+  object-position:right bottom;
+  pointer-events:none;
+  filter:drop-shadow(0 16px 22px rgba(4,20,55,.20));
+  transform:translateZ(0);
+}
+
+.hero-ai-stream{
+  position:absolute;
+  z-index:2;
+  top:0;
+  right:0;
+  width:49%;
+  height:100%;
+  overflow:hidden;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    #000 14%,
+    #000 80%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    #000 14%,
+    #000 80%,
+    transparent 100%
+  );
+}
+
+.ai-chip{
+  --right:18px;
+  --drift:0px;
+  --spin:0deg;
+  --life:5.4s;
+  --delay:0s;
+
+  position:absolute;
+  right:var(--right);
+  bottom:-34px;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  min-height:28px;
+  padding:6px 9px;
+  border:1px solid rgba(255,255,255,.62);
+  border-radius:999px;
+
+  background:rgba(255,255,255,.88);
+  color:#102a4c;
+  box-shadow:
+    0 8px 24px rgba(5,26,73,.18),
+    inset 0 1px 0 rgba(255,255,255,.8);
+
+  font-size:11px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-.1px;
+  white-space:nowrap;
+
+  opacity:0;
+  will-change:transform,opacity;
+  transform:translate3d(0,34px,0) rotate(0deg) scale(.86);
+  animation:ai-chip-rise var(--life) linear infinite;
+  animation-delay:var(--delay);
+
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+
+.ai-chip-mark{
+  width:17px;
+  height:17px;
+  flex:0 0 17px;
+  display:grid;
+  place-items:center;
+  border-radius:6px;
+  color:#fff;
+  font-size:10px;
+  font-weight:900;
+  background:linear-gradient(135deg,#38bdf8,#2563eb);
+}
+
+.ai-chip[data-ai="gpt"] .ai-chip-mark{
+  background:linear-gradient(135deg,#10b981,#0f766e);
+}
+.ai-chip[data-ai="gemini"] .ai-chip-mark{
+  background:linear-gradient(135deg,#60a5fa,#7c3aed);
+}
+.ai-chip[data-ai="claude"] .ai-chip-mark{
+  background:linear-gradient(135deg,#fb923c,#c2410c);
+}
+.ai-chip[data-ai="midjourney"] .ai-chip-mark{
+  background:linear-gradient(135deg,#a78bfa,#db2777);
+}
+.ai-chip[data-ai="perplexity"] .ai-chip-mark{
+  background:linear-gradient(135deg,#22d3ee,#0284c7);
+}
+
+@keyframes ai-chip-rise{
+  0%{
+    opacity:0;
+    transform:translate3d(0,34px,0) rotate(0deg) scale(.86);
+  }
+  12%{opacity:.90}
+  70%{opacity:.78}
+  88%{opacity:.45}
+  100%{
+    opacity:0;
+    transform:translate3d(var(--drift),-230px,0) rotate(var(--spin)) scale(1.04);
+  }
+}
+
+@media(min-width:768px){
+  .hero{min-height:270px}
+  .hero-portrait{width:45%;height:112%;right:-4px}
+  .hero-ai-stream{width:47%}
+  .ai-chip{font-size:12px;padding:7px 10px;min-height:30px}
+}
+
+@media(min-width:481px) and (max-width:767px){
+  .hero{min-height:238px}
+  .hero-portrait{width:48%;height:105%;right:-14px}
+  .hero-ai-stream{width:50%}
+}
+
+@media(max-width:480px){
+  .hero{min-height:218px}
+  .hero-copy{width:64%}
+  .hero-portrait{width:53%;height:96%;right:-18px;bottom:-1px}
+  .hero-ai-stream{width:49%}
+
+  .ai-chip{
+    min-height:24px;
+    padding:5px 7px;
+    gap:5px;
+    font-size:9px;
+    box-shadow:0 6px 16px rgba(5,26,73,.16);
+  }
+
+  .ai-chip-mark{
+    width:14px;
+    height:14px;
+    flex-basis:14px;
+    border-radius:5px;
+    font-size:8px;
+  }
+
+  @keyframes ai-chip-rise{
+    0%{
+      opacity:0;
+      transform:translate3d(0,28px,0) rotate(0deg) scale(.84);
+    }
+    12%{opacity:.88}
+    72%{opacity:.72}
+    90%{opacity:.40}
+    100%{
+      opacity:0;
+      transform:translate3d(var(--drift),-195px,0) rotate(var(--spin)) scale(1.02);
+    }
+  }
+}
+
+@media(max-width:350px){
+  .hero{min-height:205px}
+  .hero-portrait{width:55%;height:91%;right:-22px}
+  .hero-ai-stream{width:50%}
+  .ai-chip{font-size:8px;padding:4px 6px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .ai-chip{display:none;animation:none}
+}
