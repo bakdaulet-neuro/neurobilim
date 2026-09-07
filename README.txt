@@ -1,17 +1,13 @@
-Neuro Bilim — progress sync across devices
+Жүктеу реті:
+1) progress-sync.js — жаңа файл ретінде GitHub репозиторийдің түбіне жүктеу.
+2) index.html — бар файлды осы файлмен ауыстыру.
 
-Replace these two files in the root of the GitHub repository:
-- app.js
-- index.html
+Сосын:
+- алдымен прогресс тұрған ЕСКІ телефоннан Neuro Bilim-ді аш;
+- 3–5 секунд күт;
+- содан кейін дәл сол Telegram аккаунтымен екінші телефоннан аш.
 
-What changes:
-- lesson progress is still cached locally;
-- inside Telegram, progress is also saved to Telegram CloudStorage;
-- the same Telegram account can restore progress on another phone/device;
-- existing old local progress is migrated to cloud when the UPDATED Mini App
-  is opened on the old device at least once.
-
-Important migration order:
-1. First open the UPDATED Mini App on the old phone where the progress still exists.
-2. Wait a few seconds.
-3. Then open it on the second phone using the SAME Telegram account.
+Тексеру үшін DevTools Console-да:
+window.NeuroBilimProgressSync
+дегенді жазуға болады.
+supported:true болса CloudStorage қолжетімді.
